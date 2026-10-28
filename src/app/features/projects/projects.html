@@ -1,0 +1,178 @@
+<app-page-hero
+  eyebrow="Project gallery"
+  title="Structures that are already at work."
+  crumb="Projects"
+  image="assets/img/project-08.webp"
+  subtitle="A cross-section of industrial, commercial, food, pharma and agri projects — filtered by the sector they serve."
+>
+  <div class="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-[0.68rem] font-medium uppercase tracking-[0.14em] text-white/50">
+    <span class="flex items-center gap-2">
+      <span class="font-display text-xl text-gold-300">{{ projects.length }}</span>
+      representative projects
+    </span>
+    <span class="flex items-center gap-2">
+      <span class="font-display text-xl text-gold-300">05</span>
+      sectors
+    </span>
+    <span class="flex items-center gap-2">
+      <span class="font-display text-xl text-gold-300">PAN</span>
+      India execution
+    </span>
+  </div>
+</app-page-hero>
+
+<section class="bg-white py-14 lg:py-20">
+  <div class="container-x">
+    <!-- Filters -->
+    <div class="flex flex-col gap-5 border-b border-steel-200 pb-6 lg:flex-row lg:items-center lg:justify-between">
+      <div class="no-scrollbar -mx-1 flex gap-2 overflow-x-auto px-1 py-1">
+        @for (filter of filters; track filter) {
+          <button
+            type="button"
+            class="flex flex-none items-center gap-2 border px-3.5 py-2 text-[0.64rem] font-semibold uppercase tracking-[0.1em] transition-colors"
+            [class.border-navy-900]="selected() === filter"
+            [class.bg-navy-900]="selected() === filter"
+            [class.text-white]="selected() === filter"
+            [class.border-steel-200]="selected() !== filter"
+            [class.bg-white]="selected() !== filter"
+            [class.text-steel-600]="selected() !== filter"
+            (click)="select(filter)"
+            [attr.aria-pressed]="selected() === filter"
+          >
+            {{ filter }}
+            <span
+              class="font-display text-[0.7rem] leading-none"
+              [class.text-gold-300]="selected() === filter"
+              [class.text-steel-400]="selected() !== filter"
+            >
+              {{ count(filter) }}
+            </span>
+          </button>
+        }
+      </div>
+      <p class="text-[0.7rem] uppercase tracking-[0.14em] text-steel-400">
+        Showing <span class="font-semibold text-navy-800">{{ filtered().length }}</span> projects
+      </p>
+    </div>
+
+    <!-- Grid -->
+    @if (filtered().length) {
+      <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        @for (project of filtered(); track project.id; let i = $index) {
+          <div [appReveal]="(i % 3) * 60">
+            <app-project-card [project]="project" (open)="openProject($event)" />
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="mt-10 border border-steel-200 bg-steel-50 p-10 text-center">
+        <p class="font-display text-xl text-navy-900">No projects in this category yet.</p>
+        <p class="mt-2 text-sm text-steel-600">Talk to us about your sector — we will share relevant case studies.</p>
+      </div>
+    }
+
+    <p class="mt-8 max-w-3xl text-[0.72rem] italic leading-relaxed text-steel-400">
+      Project imagery and specifications shown are representative of delivered building typologies.
+      Client names, exact locations and commercial details are shared only with consent. Contact us
+      for a sector-specific case study pack.
+    </p>
+  </div>
+</section>
+
+<app-cta-band
+  image="assets/img/hero-1.webp"
+  title="Your facility could be the next one on this page."
+  description="Bring us the requirement. We will engineer the building, specify the envelope and deliver it as one scope."
+/>
+
+<!-- Lightbox -->
+@if (activeProject(); as project) {
+  <div class="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true" [attr.aria-label]="project.title">
+    <div class="modal-backdrop absolute inset-0 bg-navy-950/85 backdrop-blur-sm" (click)="close()"></div>
+
+    <div class="modal-card relative max-h-[92vh] w-full max-w-5xl overflow-y-auto border border-white/10 bg-white">
+      <button
+        #modalClose
+        type="button"
+        class="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center border border-white/30 bg-navy-950/60 text-white backdrop-blur transition-colors hover:border-gold-300 hover:text-gold-300"
+        (click)="close()"
+        aria-label="Close project details"
+      >
+        <app-icon name="close" [size]="18" />
+      </button>
+
+      <div class="grid lg:grid-cols-[1.1fr_0.9fr]">
+        <div class="relative bg-navy-950">
+          <img
+            [src]="project.image"
+            [alt]="project.title + ' — ' + project.location"
+            class="h-64 w-full object-cover sm:h-80 lg:h-full"
+            width="720"
+            height="450"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy-950/60 to-transparent lg:bg-gradient-to-r"></div>
+          <span class="absolute bottom-4 left-4 border border-white/20 bg-navy-950/70 px-3 py-1.5 text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-white/80 backdrop-blur">
+            {{ project.sector }}
+          </span>
+        </div>
+
+        <div class="p-6 sm:p-8">
+          <p class="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-gold-700">
+            {{ project.category }}
+          </p>
+          <h2 class="display mt-3 text-[1.9rem] leading-[1.02] text-navy-900 sm:text-[2.3rem]">
+            {{ project.title }}
+          </h2>
+
+          <dl class="mt-6 grid grid-cols-2 gap-px border border-steel-200 bg-steel-200">
+            <div class="bg-white p-3.5">
+              <dt class="text-[0.55rem] font-semibold uppercase tracking-[0.14em] text-steel-400">Location</dt>
+              <dd class="mt-1 text-[0.82rem] font-medium text-navy-900">{{ project.location }}</dd>
+            </div>
+            <div class="bg-white p-3.5">
+              <dt class="text-[0.55rem] font-semibold uppercase tracking-[0.14em] text-steel-400">Covered area</dt>
+              <dd class="mt-1 text-[0.82rem] font-medium text-navy-900">{{ project.area }}</dd>
+            </div>
+          </dl>
+
+          <p class="mt-6 text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-steel-400">
+            Scope delivered
+          </p>
+          <ul class="mt-3 space-y-2.5">
+            @for (scope of project.scope; track scope) {
+              <li class="flex gap-2.5 text-[0.85rem] leading-snug text-steel-600">
+                <app-icon name="check" [size]="14" class="mt-0.5 text-gold-700" />
+                {{ scope }}
+              </li>
+            }
+          </ul>
+
+          <div class="mt-7 flex items-center justify-between gap-4 border-t border-steel-200 pt-5">
+            <div class="flex gap-2">
+              <button
+                type="button"
+                class="flex h-9 w-9 items-center justify-center border border-steel-300 text-navy-800 transition-colors hover:border-navy-900"
+                (click)="step(-1)"
+                aria-label="Previous project"
+              >
+                <app-icon name="chevron-left" [size]="16" />
+              </button>
+              <button
+                type="button"
+                class="flex h-9 w-9 items-center justify-center border border-steel-300 text-navy-800 transition-colors hover:border-navy-900"
+                (click)="step(1)"
+                aria-label="Next project"
+              >
+                <app-icon name="chevron-right" [size]="16" />
+              </button>
+            </div>
+            <a routerLink="/contact" class="btn btn-gold btn-sm">
+              Similar project
+              <app-icon name="arrow-right" [size]="14" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}

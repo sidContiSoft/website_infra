@@ -1,0 +1,373 @@
+<app-hero />
+
+<!-- Stats strip -->
+<section aria-label="Capability highlights" class="border-b border-steel-200 bg-white">
+  <div class="container-x">
+    <div class="grid grid-cols-2 gap-px bg-steel-200 md:grid-cols-4">
+      @for (stat of stats; track stat.label) {
+        <div class="bg-white px-5 py-7 sm:px-7 sm:py-8">
+          <p class="display text-[2rem] leading-none text-navy-900 sm:text-[2.35rem]">
+            {{ stat.value }}
+          </p>
+          <p class="mt-2 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-navy-700">
+            {{ stat.label }}
+          </p>
+          <p class="mt-1 text-[0.75rem] text-steel-500">{{ stat.detail }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Intro + services -->
+<section class="bg-white py-20 lg:py-28" id="services">
+  <div class="container-x">
+    <div class="grid gap-8 lg:grid-cols-[1fr_0.85fr] lg:items-end">
+      <div appReveal>
+        <p class="eyebrow">What we deliver</p>
+        <h2 class="display mt-4 text-[2.35rem] leading-[0.94] text-navy-900 sm:text-[3rem] lg:text-[3.4rem]">
+          One partner.<br />Eight engineering<br class="hidden sm:block" />
+          capabilities.
+        </h2>
+      </div>
+      <div [appReveal]="120" class="lg:pb-2">
+        <p class="text-[0.98rem] leading-relaxed text-steel-600">
+          From the first framing drawing to the final flashing, Supreme Electromech delivers
+          structures, envelopes and precision components as a single, coordinated scope — with
+          the toolroom accuracy our name was built on.
+        </p>
+        <div class="mt-6 flex flex-wrap items-center gap-3">
+          <a routerLink="/services" class="btn btn-navy btn-sm">
+            All services
+            <app-icon name="arrow-right" [size]="15" />
+          </a>
+          <a routerLink="/about" class="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-navy-700 underline decoration-gold-400 decoration-2 underline-offset-8 hover:text-gold-700">
+            About the company
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      @for (service of services; track service.id; let i = $index) {
+        <a
+          [appReveal]="i * 60"
+          [routerLink]="['/services']"
+          [fragment]="service.id"
+          class="card card-lift group relative flex flex-col overflow-hidden p-6"
+        >
+          <span class="absolute inset-x-0 top-0 h-[2px] w-0 bg-gold-500 transition-all duration-500 group-hover:w-full"></span>
+          <div class="flex items-start justify-between">
+            <span
+              class="flex h-12 w-12 items-center justify-center border border-steel-200 bg-steel-50 text-navy-800 transition-colors duration-300 group-hover:border-gold-300 group-hover:bg-gold-400 group-hover:text-navy-950"
+            >
+              <app-icon [name]="service.icon" [size]="24" />
+            </span>
+            <span class="font-display text-sm tracking-[0.1em] text-steel-300">
+              0{{ i + 1 }}
+            </span>
+          </div>
+          <h3 class="mt-5 font-display text-[1.3rem] leading-[1.08] text-navy-900">
+            {{ service.title }}
+          </h3>
+          <p class="mt-3 flex-1 text-[0.83rem] leading-relaxed text-steel-600">
+            {{ service.summary }}
+          </p>
+          <span
+            class="mt-5 inline-flex items-center gap-2 border-t border-steel-100 pt-4 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-navy-700 transition-colors group-hover:text-gold-700"
+          >
+            <app-icon name="arrow-right" [size]="13" class="transition-transform group-hover:translate-x-1" />
+            {{ service.tag }}
+          </span>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Technical highlight -->
+<section class="relative overflow-hidden border-y border-steel-200 bg-steel-50 py-20 lg:py-28">
+  <div class="dot-grid absolute inset-0 opacity-40"></div>
+  <div class="container-x relative">
+    <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div appReveal class="order-2 lg:order-1">
+        <div class="diagram-frame relative bg-white p-4 shadow-soft sm:p-6">
+          <div class="absolute left-4 top-4 flex items-center gap-2 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-gold-700">
+            <span class="h-1.5 w-1.5 rounded-full bg-gold-500"></span>
+            3D detailed frame
+          </div>
+          <div class="flex items-center justify-center px-2 pt-8">
+            <img
+              src="assets/img/dw-frame.webp"
+              alt="Isometric drawing of a pre-engineered steel building rigid frame with purlins, eave strut and jack beams"
+              class="h-auto w-full"
+              width="619"
+              height="399"
+              loading="lazy"
+            />
+          </div>
+          <div class="mt-4 grid grid-cols-3 gap-px border-t border-steel-200 bg-steel-200 text-center">
+            @for (tool of tools; track tool.name) {
+              <div class="bg-white px-2 py-3">
+                <p class="font-display text-lg leading-none text-navy-900">{{ tool.name }}</p>
+                <p class="mt-1 text-[0.55rem] uppercase tracking-[0.12em] text-steel-500">
+                  {{ tool.role }}
+                </p>
+              </div>
+            }
+          </div>
+          <div class="absolute -bottom-3 -left-3 hidden h-14 w-14 border-b-2 border-l-2 border-gold-400/70 sm:block"></div>
+          <div class="absolute -right-3 -top-3 hidden h-14 w-14 border-r-2 border-t-2 border-gold-400/70 sm:block"></div>
+        </div>
+      </div>
+
+      <div [appReveal]="120" class="order-1 lg:order-2">
+        <p class="eyebrow">Technical depth</p>
+        <h2 class="display mt-4 text-[2.3rem] leading-[0.94] text-navy-900 sm:text-[3rem] lg:text-[3.35rem]">
+          Modelled, analysed and detailed before the first member is cut.
+        </h2>
+        <p class="mt-5 text-[0.96rem] leading-relaxed text-steel-600">
+          Our engineering office works in MBS, STAAD.Pro and TEKLA Structures, applying
+          international design codes to every frame, connection and panel layout. The result is a
+          buildable model — not a best guess.
+        </p>
+
+        <ul class="mt-8 space-y-5">
+          @for (tool of tools; track tool.name; let i = $index) {
+            <li class="flex gap-4 border-b border-steel-200 pb-5 last:border-0 last:pb-0">
+              <span class="font-display text-sm tracking-[0.12em] text-gold-700">0{{ i + 1 }}</span>
+              <div>
+                <h3 class="font-display text-lg leading-none text-navy-900">{{ tool.name }}</h3>
+                <p class="mt-1.5 text-[0.84rem] leading-relaxed text-steel-600">
+                  {{ tool.description }}
+                </p>
+              </div>
+            </li>
+          }
+        </ul>
+
+        <div class="mt-7 flex flex-wrap gap-2">
+          @for (frame of frames; track frame.id) {
+            <span class="badge">{{ frame.name }}</span>
+          }
+        </div>
+
+        <a routerLink="/technical" class="btn btn-outline-dark mt-8">
+          Technical capabilities
+          <app-icon name="arrow-up-right" [size]="15" />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Panel systems -->
+<section class="relative isolate overflow-hidden bg-navy-950 py-20 text-white lg:py-28">
+  <div class="tech-grid absolute inset-0 opacity-40"></div>
+  <div class="absolute -right-40 top-0 h-96 w-96 rounded-full bg-navy-600/20 blur-3xl"></div>
+  <div class="container-x relative">
+    <div class="grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:items-end">
+      <div appReveal>
+        <p class="eyebrow eyebrow-light">Envelope systems</p>
+        <h2 class="display mt-4 text-[2.35rem] leading-[0.94] text-white sm:text-[3rem] lg:text-[3.4rem]">
+          Roof and wall systems<br class="hidden sm:block" />
+          specified to the degree.
+        </h2>
+      </div>
+      <div [appReveal]="120" class="lg:pb-2">
+        <p class="text-[0.96rem] leading-relaxed text-white/60">
+          Insulated roof and wall panels from 30 mm to 150 mm, standing seam and high-rib profiles,
+          and MS deck sheets for composite floors — with every accessory resolved as part of the
+          envelope.
+        </p>
+        <a routerLink="/technical" class="mt-5 inline-flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-gold-300 hover:text-gold-200">
+          View panel specifications
+          <app-icon name="arrow-up-right" [size]="14" />
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-12 grid gap-5 md:grid-cols-3">
+      @for (panel of panels; track panel.id; let i = $index) {
+        <article
+          [appReveal]="i * 90"
+          class="group border border-white/10 bg-white/[0.035] transition-colors hover:border-gold-400/40"
+        >
+          <div class="flex items-center justify-between border-b border-white/10 px-5 py-3">
+            <span class="text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-white/40">
+              0{{ i + 1 }} / {{ panel.thickness }}
+            </span>
+            <app-icon [name]="panel.icon" [size]="16" class="text-gold-400" />
+          </div>
+          <div class="bg-white p-4">
+            <img
+              [src]="panel.id === 'roof-panel' ? 'assets/img/dw-roof-panel.webp' : panel.id === 'wall-panel' ? 'assets/img/dw-wall-panel.webp' : 'assets/img/dw-deck.webp'"
+              [alt]="panel.name + ' technical profile drawing'"
+              class="mx-auto h-40 w-full object-contain"
+              width="700"
+              height="480"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-5">
+            <h3 class="font-display text-[1.4rem] leading-tight text-white">{{ panel.name }}</h3>
+            <dl class="mt-3 space-y-2 text-[0.78rem]">
+              <div class="flex justify-between gap-4 border-b border-white/10 pb-2">
+                <dt class="text-white/40">Core</dt>
+                <dd class="text-right text-white/75">{{ panel.core }}</dd>
+              </div>
+              <div class="flex justify-between gap-4">
+                <dt class="text-white/40">Application</dt>
+                <dd class="max-w-[60%] text-right text-white/75">{{ panel.application }}</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+      }
+    </div>
+
+    <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-white/10 pt-6">
+      <span class="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-white/35">
+        Accessories
+      </span>
+      @for (accessory of accessories; track accessory.name) {
+        <span class="flex items-center gap-2 text-[0.72rem] text-white/55">
+          <app-icon name="check" [size]="12" class="text-gold-400" />
+          {{ accessory.name }}
+        </span>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Standard + process -->
+<section class="bg-white py-20 lg:py-28">
+  <div class="container-x">
+    <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+      <div appReveal>
+        <p class="eyebrow">The Supreme standard</p>
+        <h2 class="display mt-4 text-[2.35rem] leading-[0.94] text-navy-900 sm:text-[3rem]">
+          Precision is a process,<br class="hidden sm:block" />
+          not a promise.
+        </h2>
+        <p class="mt-5 text-[0.96rem] leading-relaxed text-steel-600">
+          Every project moves through the same disciplined gates — design review, drawing control,
+          fabrication inspection and documented erection.
+        </p>
+
+        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+          @for (item of differentiators; track item.title) {
+            <div class="border border-steel-200 p-4 transition-colors hover:border-gold-300">
+              <app-icon [name]="item.icon" [size]="22" class="text-gold-700" />
+              <h3 class="mt-3 font-display text-[1.05rem] leading-tight text-navy-900">
+                {{ item.title }}
+              </h3>
+              <p class="mt-1.5 text-[0.78rem] leading-relaxed text-steel-600">
+                {{ item.description }}
+              </p>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div [appReveal]="120">
+        <div class="border border-steel-200 bg-steel-50 p-6 sm:p-8">
+          <div class="flex items-center justify-between">
+            <p class="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-steel-500">
+              Delivery sequence
+            </p>
+            <span class="badge border-gold-300 bg-white text-gold-700">05 stages</span>
+          </div>
+
+          <ol class="mt-6 space-y-0">
+            @for (step of process; track step.step; let last = $last) {
+              <li class="relative flex gap-5 pb-7 last:pb-0">
+                @if (!last) {
+                  <span class="absolute left-[19px] top-10 h-full w-px bg-steel-300" aria-hidden="true"></span>
+                }
+                <span
+                  class="relative z-10 flex h-10 w-10 flex-none items-center justify-center rounded-full border border-navy-800 bg-navy-900 font-display text-sm text-gold-300"
+                >
+                  {{ step.step }}
+                </span>
+                <div class="pt-0.5">
+                  <h3 class="font-display text-[1.25rem] leading-none text-navy-900">
+                    {{ step.title }}
+                  </h3>
+                  <p class="mt-1.5 text-[0.84rem] leading-relaxed text-steel-600">
+                    {{ step.description }}
+                  </p>
+                </div>
+              </li>
+            }
+          </ol>
+
+          <a routerLink="/contact" class="btn btn-navy btn-sm mt-8 w-full">
+            Start your project
+            <app-icon name="arrow-right" [size]="15" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured projects -->
+<section class="border-y border-steel-200 bg-steel-50 py-20 lg:py-28">
+  <div class="container-x">
+    <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+      <div appReveal>
+        <p class="eyebrow">Selected work</p>
+        <h2 class="display mt-4 text-[2.35rem] leading-[0.94] text-navy-900 sm:text-[3rem] lg:text-[3.4rem]">
+          Structures built for<br class="hidden sm:block" />
+          real operations.
+        </h2>
+      </div>
+      <a routerLink="/projects" appReveal class="btn btn-outline-dark btn-sm self-start sm:self-auto">
+        View full gallery
+        <app-icon name="arrow-up-right" [size]="15" />
+      </a>
+    </div>
+
+    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      @for (project of featuredProjects; track project.id; let i = $index) {
+        <div [appReveal]="(i % 3) * 80">
+          <app-project-card [project]="project" (open)="openProject()" />
+        </div>
+      }
+    </div>
+    <p class="mt-6 text-[0.7rem] italic text-steel-400">
+      Project imagery and specifications are representative of delivered typologies. Full case
+      studies are available on request.
+    </p>
+  </div>
+</section>
+
+<!-- Sectors -->
+<section class="bg-white py-16 lg:py-20">
+  <div class="container-x">
+    <div class="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+      <div appReveal>
+        <p class="eyebrow">Sectors served</p>
+        <h2 class="display mt-4 text-[2rem] leading-[0.95] text-navy-900 sm:text-[2.5rem]">
+          Where our buildings<br class="hidden sm:block" />
+          go to work.
+        </h2>
+      </div>
+      <div [appReveal]="120" class="grid grid-cols-1 gap-px bg-steel-200 sm:grid-cols-2">
+        @for (sector of sectors; track sector) {
+          <div class="flex items-center gap-3 bg-white px-4 py-3.5">
+            <app-icon name="check" [size]="14" class="text-gold-700" />
+            <span class="text-[0.82rem] font-medium text-navy-800">{{ sector }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-cta-band
+  [image]="'assets/img/hero-3.webp'"
+  title="Have drawings? We can price your building."
+  description="Share your layout, span and site details. Our engineering team will respond with framing options, panel specifications and a clear commercial offer."
+/>

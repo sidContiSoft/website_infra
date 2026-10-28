@@ -1,0 +1,279 @@
+<app-page-hero
+  eyebrow="About the company"
+  title="Built by engineers. Trusted by industry."
+  crumb="About us"
+  image="assets/img/about-works.webp"
+  subtitle="A total solutions company combining precision tool engineering with the design, fabrication and delivery of steel buildings and infrastructure."
+/>
+
+<!-- Profile -->
+<section class="bg-white py-20 lg:py-28">
+  <div class="container-x">
+    <div class="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+      <div>
+        <div [appReveal]="0">
+          <p class="eyebrow">Company profile</p>
+          <h2 class="display mt-4 text-[2.3rem] leading-[0.94] text-navy-900 sm:text-[3rem] lg:text-[3.3rem]">
+            Engineering and infrastructure,<br class="hidden sm:block" />
+            under one roof.
+          </h2>
+        </div>
+
+        <div [appReveal]="100" class="mt-7 space-y-5 text-[0.95rem] leading-relaxed text-steel-600">
+          <p>
+            <strong class="font-semibold text-navy-900">Supreme Electromech Power &amp; Infra</strong>
+            works where precision engineering meets large-scale infrastructure. We design,
+            fabricate and deliver pre-engineered steel buildings, specialised metal roofing and
+            insulated envelopes, utility systems and fire protection — as a single accountable
+            scope.
+          </p>
+          <p>
+            Our engineering office models every structure in MBS, STAAD.Pro and TEKLA Structures,
+            detailing frames and connections against AISC, MBMA, AWS, ASCE and Indian Standards.
+            Our works at Faridabad and New Delhi support fabrication, tooling and assembly for
+            projects across India.
+          </p>
+          <p>
+            A precision toolroom discipline sits beneath all of it: components are measured,
+            inspected and documented before they leave the works. That is why our buildings fit
+            together on site — and why clients return with their next facility.
+          </p>
+        </div>
+
+        <div [appReveal]="160" class="mt-8 grid grid-cols-2 gap-px border border-steel-200 bg-steel-200 sm:grid-cols-4">
+          @for (stat of stats; track stat.label) {
+            <div class="bg-white px-4 py-5">
+              <p class="display text-[1.65rem] leading-none text-navy-900">{{ stat.value }}</p>
+              <p class="mt-1.5 text-[0.62rem] font-semibold uppercase leading-snug tracking-[0.12em] text-steel-500">
+                {{ stat.label }}
+              </p>
+            </div>
+          }
+        </div>
+
+        <a routerLink="/services" class="btn btn-navy mt-8">
+          Explore our capabilities
+          <app-icon name="arrow-right" [size]="15" />
+        </a>
+      </div>
+
+      <div [appReveal]="120" class="relative">
+        <div class="relative overflow-hidden">
+          <img
+            src="assets/img/about-works.webp"
+            alt="Interior of a pre-engineered industrial building with steel framing and roof panels"
+            class="h-[340px] w-full object-cover sm:h-[430px] lg:h-[520px]"
+            width="1200"
+            height="900"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy-950/70 via-transparent to-transparent"></div>
+          <div class="absolute left-5 top-5 border border-white/25 bg-navy-950/50 px-3 py-1.5 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-white/80 backdrop-blur-sm">
+            Works &amp; project delivery
+          </div>
+          <div class="absolute inset-x-5 bottom-5 flex items-end justify-between gap-4">
+            <div>
+              <p class="text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-gold-300">
+                Execution footprint
+              </p>
+              <p class="mt-1 font-display text-2xl leading-none text-white">
+                Faridabad · New Delhi · Pan-India
+              </p>
+            </div>
+            <app-icon name="map-pin" [size]="26" class="text-gold-300" />
+          </div>
+        </div>
+        <div class="absolute -bottom-4 -right-4 hidden h-24 w-24 border-b-2 border-r-2 border-gold-400/70 lg:block"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Vision / mission -->
+<section class="relative isolate overflow-hidden bg-navy-950 py-20 text-white lg:py-28">
+  <div class="tech-grid absolute inset-0 opacity-40"></div>
+  <div class="absolute -left-32 top-10 h-80 w-80 rounded-full bg-navy-600/20 blur-3xl"></div>
+  <div class="container-x relative">
+    <div class="grid gap-6 lg:grid-cols-2">
+      <article [appReveal]="0" class="border border-white/10 bg-white/[0.035] p-7 sm:p-9">
+        <div class="flex items-center gap-3">
+          <span class="flex h-11 w-11 items-center justify-center border border-gold-400/40 text-gold-300">
+            <app-icon name="target" [size]="22" />
+          </span>
+          <p class="text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-white/40">Vision</p>
+        </div>
+        <h2 class="display mt-6 text-[1.9rem] leading-[1.02] text-white sm:text-[2.3rem]">
+          To be the infrastructure partner Indian industry turns to when precision, timeline and
+          accountability cannot be compromised.
+        </h2>
+      </article>
+
+      <article [appReveal]="100" class="border border-white/10 bg-white/[0.035] p-7 sm:p-9">
+        <div class="flex items-center gap-3">
+          <span class="flex h-11 w-11 items-center justify-center border border-gold-400/40 text-gold-300">
+            <app-icon name="gear" [size]="22" />
+          </span>
+          <p class="text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-white/40">Mission</p>
+        </div>
+        <p class="mt-6 text-[0.98rem] leading-relaxed text-white/70">
+          To design, fabricate and deliver steel buildings and engineering systems that perform as
+          specified — supported by accurate detailing, disciplined manufacturing and responsive
+          site execution.
+        </p>
+        <p class="mt-4 text-[0.98rem] leading-relaxed text-white/70">
+          We invest in people, software and fabrication control so that each project improves the
+          next: better drawings, fewer surprises, faster handover.
+        </p>
+      </article>
+    </div>
+
+    <div class="mt-10 border-t border-white/10 pt-8">
+      <p class="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-gold-300">
+        What we stand for
+      </p>
+      <div class="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        @for (value of values; track value.title; let i = $index) {
+          <div [appReveal]="i * 70">
+            <div class="flex items-center gap-2 text-gold-300">
+              <app-icon [name]="value.icon" [size]="18" />
+              <h3 class="font-display text-[1.2rem] uppercase tracking-[0.06em] text-white">
+                {{ value.title }}
+              </h3>
+            </div>
+            <p class="mt-2 text-[0.82rem] leading-relaxed text-white/55">{{ value.text }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Engineering quality -->
+<section class="bg-white py-20 lg:py-28">
+  <div class="container-x">
+    <div class="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
+      <div [appReveal]="0">
+        <p class="eyebrow">Engineering quality</p>
+        <h2 class="display mt-4 text-[2.3rem] leading-[0.94] text-navy-900 sm:text-[3rem]">
+          Design codes are the floor,<br class="hidden sm:block" />
+          not the ceiling.
+        </h2>
+        <p class="mt-5 text-[0.95rem] leading-relaxed text-steel-600">
+          Every structure is analysed for its actual wind, seismic, live and collateral loads before
+          detailing. Connections, bracing and panel fixings are engineered with the same rigour as
+          the primary frame.
+        </p>
+
+        <div class="mt-8 divide-y divide-steel-200 border-y border-steel-200">
+          @for (code of codes; track code.code) {
+            <div class="flex items-baseline justify-between gap-6 py-4">
+              <span class="font-display text-xl leading-none text-navy-900">{{ code.code }}</span>
+              <span class="max-w-[65%] text-right text-[0.82rem] text-steel-600">{{ code.scope }}</span>
+            </div>
+          }
+        </div>
+
+        <p class="mt-6 text-[0.78rem] leading-relaxed text-steel-500">
+          Material test certificates, weld inspection records and dimensional reports are compiled
+          into the project quality dossier. Statutory approvals and third-party inspections are
+          coordinated as part of the agreed scope.
+        </p>
+      </div>
+
+      <div [appReveal]="120">
+        <div class="border border-steel-200 bg-steel-50 p-6 sm:p-8">
+          <div class="flex items-center justify-between gap-4">
+            <p class="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-steel-500">
+              Quality gates
+            </p>
+            <span class="badge border-gold-300 bg-white text-gold-700">4 hold points</span>
+          </div>
+
+          <div class="mt-6 space-y-5">
+            @for (stage of stages; track stage.step) {
+              <div class="flex gap-4 border-b border-steel-200 pb-5 last:border-0 last:pb-0">
+                <span class="font-display text-xl leading-none text-gold-700">{{ stage.step }}</span>
+                <div>
+                  <h3 class="font-display text-[1.15rem] leading-none text-navy-900">
+                    {{ stage.title }}
+                  </h3>
+                  <p class="mt-2 text-[0.83rem] leading-relaxed text-steel-600">
+                    {{ stage.description }}
+                  </p>
+                </div>
+              </div>
+            }
+          </div>
+
+          <div class="mt-6 border-t border-steel-200 pt-5">
+            <p class="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-steel-500">
+              Software stack
+            </p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="badge bg-white">MBS</span>
+              <span class="badge bg-white">STAAD.Pro</span>
+              <span class="badge bg-white">TEKLA Structures</span>
+              <span class="badge bg-white">AutoCAD</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Works -->
+<section class="border-y border-steel-200 bg-steel-50 py-20 lg:py-24">
+  <div class="container-x">
+    <div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+      <div [appReveal]="0">
+        <p class="eyebrow">Our facilities</p>
+        <h2 class="display mt-4 text-[2.2rem] leading-[0.95] text-navy-900 sm:text-[2.8rem]">
+          Two works. One standard.
+        </h2>
+      </div>
+      <p [appReveal]="80" class="max-w-md text-[0.9rem] leading-relaxed text-steel-600">
+        Fabrication, tooling and assembly are supported from our Faridabad and New Delhi facilities,
+        with project teams deployed to site across India.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-5 md:grid-cols-2">
+      @for (office of offices; track office.id; let i = $index) {
+        <article [appReveal]="i * 100" class="card flex h-full flex-col p-6 sm:p-7">
+          <div class="flex items-start justify-between gap-4">
+            <span class="flex h-11 w-11 items-center justify-center border border-steel-200 bg-steel-50 text-navy-800">
+              <app-icon name="map-pin" [size]="21" />
+            </span>
+            <span class="text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-gold-700">
+              {{ office.label }}
+            </span>
+          </div>
+          <h3 class="mt-5 font-display text-[1.55rem] leading-none text-navy-900">
+            {{ office.name }}
+          </h3>
+          <address class="mt-3 flex-1 text-[0.9rem] not-italic leading-relaxed text-steel-600">
+            @for (line of office.lines; track line) {
+              <span class="block">{{ line }}</span>
+            }
+          </address>
+          <a
+            [href]="'https://www.google.com/maps/search/?api=1&query=' + encode(office.mapQuery)"
+            target="_blank"
+            rel="noopener"
+            class="mt-5 inline-flex items-center gap-2 border-t border-steel-100 pt-4 text-[0.66rem] font-semibold uppercase tracking-[0.14em] text-navy-700 hover:text-gold-700"
+          >
+            Get directions
+            <app-icon name="arrow-up-right" [size]="14" />
+          </a>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<app-cta-band
+  image="assets/img/hero-1.webp"
+  title="Let's engineer your next facility."
+  description="Bring us a layout, a site or a problem. We will bring the framing, envelope and delivery plan together."
+/>

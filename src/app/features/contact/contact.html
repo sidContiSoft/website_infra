@@ -1,0 +1,533 @@
+<app-page-hero
+  eyebrow="Contact & enquiry"
+  title="Tell us what you are building."
+  crumb="Contact"
+  image="assets/img/about-works.webp"
+  subtitle="Send a layout, a specification or just a requirement. Our engineering team will come back with a considered response — usually within one working day."
+>
+  <div class="mt-8 flex flex-wrap gap-3">
+    <a [href]="company.phones[0].href" class="btn btn-gold btn-sm">
+      <app-icon name="phone" [size]="15" />
+      {{ company.phones[0].label }}
+    </a>
+    <a [href]="company.emails[0].href" class="btn btn-outline-light btn-sm">
+      <app-icon name="mail" [size]="15" />
+      Email the team
+    </a>
+  </div>
+</app-page-hero>
+
+<!-- Quick contact -->
+<section class="border-b border-steel-200 bg-white">
+  <div class="container-x">
+    <div class="grid gap-px bg-steel-200 md:grid-cols-3">
+      <a
+        [href]="company.phones[0].href"
+        class="group flex items-start gap-4 bg-white px-5 py-6 transition-colors hover:bg-steel-50 sm:px-7"
+      >
+        <span class="flex h-11 w-11 flex-none items-center justify-center border border-steel-200 bg-steel-50 text-navy-800 transition-colors group-hover:border-gold-300 group-hover:bg-gold-400">
+          <app-icon name="phone" [size]="20" />
+        </span>
+        <span>
+          <span class="block text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-steel-500">Call us</span>
+          <span class="mt-1 block text-[0.95rem] font-medium text-navy-900">{{ company.phones[0].label }}</span>
+          <span class="mt-0.5 block text-[0.78rem] text-steel-500">{{ company.phones[1].label }}</span>
+        </span>
+      </a>
+
+      <a
+        [href]="company.emails[0].href"
+        class="group flex items-start gap-4 bg-white px-5 py-6 transition-colors hover:bg-steel-50 sm:px-7"
+      >
+        <span class="flex h-11 w-11 flex-none items-center justify-center border border-steel-200 bg-steel-50 text-navy-800 transition-colors group-hover:border-gold-300 group-hover:bg-gold-400">
+          <app-icon name="mail" [size]="20" />
+        </span>
+        <span class="min-w-0">
+          <span class="block text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-steel-500">Email us</span>
+          <span class="mt-1 space-y-1">
+            @for (email of company.emails; track email.label) {
+              <a [href]="email.href" class="block break-all text-[0.82rem] font-medium text-navy-900 hover:text-gold-700">{{ email.label }}</a>
+            }
+          </span>
+        </span>
+      </a>
+
+      <div class="flex items-start gap-4 bg-white px-5 py-6 sm:px-7">
+        <span class="flex h-11 w-11 flex-none items-center justify-center border border-steel-200 bg-steel-50 text-navy-800">
+          <app-icon name="clock" [size]="20" />
+        </span>
+        <span>
+          <span class="block text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-steel-500">Working hours</span>
+          <span class="mt-1 block text-[0.88rem] font-medium text-navy-900">{{ company.hours }}</span>
+          <span class="mt-0.5 block text-[0.78rem] text-steel-500">Site teams mobilised pan-India</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Form + sidebar -->
+<section class="bg-white py-16 lg:py-24">
+  <div class="container-x">
+    <div class="grid gap-10 lg:grid-cols-[1.45fr_0.85fr] lg:gap-14">
+      <!-- Form -->
+      <div>
+        <div [appReveal]="0">
+          <p class="eyebrow">Request a quote</p>
+          <h2 class="display mt-4 text-[2.2rem] leading-[0.95] text-navy-900 sm:text-[2.8rem]">
+            Start with the essentials.
+          </h2>
+          <p class="mt-4 max-w-xl text-[0.94rem] leading-relaxed text-steel-600">
+            The more detail you share, the sharper our first response. Drawings, layouts or a
+            photograph of the site are all useful.
+          </p>
+        </div>
+
+        @if (!prepared()) {
+          <form
+            id="contact-form"
+            class="mt-8"
+            [formGroup]="form"
+            (ngSubmit)="onSubmit()"
+            novalidate
+            [appReveal]="80"
+          >
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label class="field-label" for="name">Full name <span class="text-gold-700">*</span></label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  class="field"
+                  formControlName="name"
+                  autocomplete="name"
+                  placeholder="Your name"
+                  [class.field-invalid]="showError('name')"
+                />
+                @if (showError('name')) {
+                  <p class="field-error">Please enter your name.</p>
+                }
+              </div>
+
+              <div>
+                <label class="field-label" for="company">Company</label>
+                <input
+                  id="company"
+                  name="company"
+                  type="text"
+                  class="field"
+                  formControlName="company"
+                  autocomplete="organization"
+                  placeholder="Company name"
+                />
+              </div>
+
+              <div>
+                <label class="field-label" for="email">Email <span class="text-gold-700">*</span></label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  class="field"
+                  formControlName="email"
+                  autocomplete="email"
+                  placeholder="you@company.com"
+                  [class.field-invalid]="showError('email')"
+                />
+                @if (showError('email')) {
+                  <p class="field-error">Please enter a valid email address.</p>
+                }
+              </div>
+
+              <div>
+                <label class="field-label" for="phone">Phone <span class="text-gold-700">*</span></label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  class="field"
+                  formControlName="phone"
+                  autocomplete="tel"
+                  placeholder="+91 00000 00000"
+                  [class.field-invalid]="showError('phone')"
+                />
+                @if (showError('phone')) {
+                  <p class="field-error">Please enter a valid phone number.</p>
+                }
+              </div>
+
+              <div class="sm:col-span-2">
+                <label class="field-label" for="service">
+                  Service required <span class="text-gold-700">*</span>
+                </label>
+                <select
+                  id="service"
+                  name="service"
+                  class="field appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%234f6478%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E')] bg-[position:right_0.9rem_center] bg-no-repeat pr-10"
+                  formControlName="service"
+                  [class.field-invalid]="showError('service')"
+                >
+                  <option value="" disabled>Select a capability</option>
+                  @for (option of serviceOptions; track option) {
+                    <option [value]="option">{{ option }}</option>
+                  }
+                </select>
+                @if (showError('service')) {
+                  <p class="field-error">Please choose the scope you need.</p>
+                }
+              </div>
+
+              <div>
+                <label class="field-label" for="location">Project location</label>
+                <input
+                  id="location"
+                  name="location"
+                  type="text"
+                  class="field"
+                  formControlName="location"
+                  placeholder="City / state"
+                />
+              </div>
+
+              <div>
+                <label class="field-label" for="area">Approx. built-up area</label>
+                <input
+                  id="area"
+                  name="area"
+                  type="text"
+                  class="field"
+                  formControlName="area"
+                  placeholder="e.g. 25,000 sq. ft."
+                />
+              </div>
+
+              <div class="sm:col-span-2">
+                <label class="field-label" for="details">
+                  Project details <span class="text-gold-700">*</span>
+                </label>
+                <textarea
+                  id="details"
+                  name="details"
+                  rows="5"
+                  class="field resize-y"
+                  formControlName="details"
+                  placeholder="Intended use, span, eave height, crane or mezzanine requirement, target timeline…"
+                  [class.field-invalid]="showError('details')"
+                ></textarea>
+                @if (showError('details')) {
+                  <p class="field-error">Please add a few lines about the project (at least 20 characters).</p>
+                }
+              </div>
+
+              <!-- File upload -->
+              <div class="sm:col-span-2">
+                <span class="field-label">Drawings / attachments</span>
+                <div
+                  class="relative flex flex-col items-center justify-center border border-dashed px-5 py-7 text-center transition-colors"
+                  [class.border-gold-500]="dragActive()"
+                  [class.bg-gold-200/20]="dragActive()"
+                  [class.border-steel-300]="!dragActive()"
+                  (dragover)="onDragOver($event)"
+                  (dragleave)="onDragLeave()"
+                  (drop)="onDrop($event)"
+                >
+                  @if (selectedFile(); as file) {
+                    <div class="flex w-full flex-col items-center gap-3 sm:flex-row sm:text-left">
+                      <span class="flex h-10 w-10 flex-none items-center justify-center border border-steel-200 bg-white text-navy-800">
+                        <app-icon name="file" [size]="18" />
+                      </span>
+                      <span class="min-w-0 flex-1">
+                        <span class="block truncate text-[0.85rem] font-medium text-navy-900">{{ file.name }}</span>
+                        <span class="block text-[0.72rem] text-steel-500">{{ preparedFileSize() }} · ready to attach</span>
+                      </span>
+                      <button
+                        type="button"
+                        class="text-[0.66rem] font-semibold uppercase tracking-[0.12em] text-steel-500 hover:text-red-700"
+                        (click)="removeFile()"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  } @else {
+                    <app-icon name="upload" [size]="24" class="text-steel-400" />
+                    <p class="mt-3 text-[0.85rem] font-medium text-navy-900">
+                      Drag a drawing here, or
+                      <label for="drawing" class="cursor-pointer text-gold-700 underline decoration-gold-400 underline-offset-4">
+                        choose a file
+                      </label>
+                    </p>
+                    <p class="mt-1 text-[0.72rem] text-steel-500">
+                      PDF, DWG, DXF, image, Word or Excel · up to 9 MB
+                    </p>
+                  }
+                  <input
+                    id="drawing"
+                    name="attachment"
+                    type="file"
+                    class="sr-only"
+                    accept=".pdf,.dwg,.dxf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx"
+                    (change)="onFileSelected($event)"
+                  />
+                </div>
+                @if (fileError()) {
+                  <p class="field-error">{{ fileError() }}</p>
+                }
+              </div>
+
+              <div class="sm:col-span-2">
+                <label class="flex cursor-pointer items-start gap-3 text-[0.78rem] leading-relaxed text-steel-600">
+                  <input
+                    type="checkbox"
+                    name="consent"
+                    class="mt-0.5 h-4 w-4 flex-none accent-gold-500"
+                    formControlName="consent"
+                    [class.field-invalid]="showError('consent')"
+                  />
+                  <span>
+                    I agree to be contacted about this enquiry. My details will be used only to
+                    respond to this request.
+                  </span>
+                </label>
+                @if (showError('consent')) {
+                  <p class="field-error">Please confirm before sending.</p>
+                }
+              </div>
+            </div>
+
+            <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center">
+              <button type="submit" class="btn btn-gold sm:min-w-[220px]" [disabled]="sending()">
+                {{ sending() ? 'Sending enquiry…' : 'Send enquiry' }}
+                <app-icon name="arrow-right" [size]="16" />
+              </button>
+              <p class="text-[0.72rem] leading-relaxed text-steel-500">
+                Your enquiry will be emailed to our team. You can also follow up on WhatsApp.
+              </p>
+            </div>
+            @if (sendError()) {
+              <p class="mt-3 text-sm font-medium text-red-700" role="alert">{{ sendError() }}</p>
+            }
+          </form>
+        } @else {
+          <!-- Confirmation -->
+          <div
+            id="enquiry-confirmation"
+            class="mt-8 border border-gold-300 bg-gold-200/25 p-6 sm:p-8"
+            [appReveal]="0"
+            role="status"
+          >
+            <div class="flex items-start gap-4">
+              <span class="flex h-11 w-11 flex-none items-center justify-center rounded-full bg-navy-900 text-gold-300">
+                <app-icon name="check" [size]="20" />
+              </span>
+              <div>
+                <h3 class="font-display text-[1.55rem] leading-none text-navy-900">
+                  {{ sent() ? 'Thank you, ' : 'Your enquiry is ready, ' }}{{ form.controls.name.value }}.
+                </h3>
+                <p class="mt-2 text-[0.88rem] leading-relaxed text-steel-600">
+                  @if (sent()) {
+                    Your enquiry has been sent to our team. We will respond within one working day.
+                  } @else {
+                    Follow up on WhatsApp or download a copy of your enquiry.
+                  }
+                </p>
+              </div>
+            </div>
+
+            @if (prepared(); as enquiry) {
+              <div class="mt-6 flex flex-wrap gap-3">
+                <a [href]="enquiry.whatsapp" target="_blank" rel="noopener" class="btn btn-navy btn-sm">
+                  <app-icon name="message" [size]="15" />
+                  Send on WhatsApp
+                </a>
+                <button type="button" class="btn btn-outline-dark btn-sm" (click)="downloadEnquiry()">
+                  <app-icon name="file" [size]="14" />
+                  Download copy
+                </button>
+                <button type="button" class="btn btn-outline-dark btn-sm" (click)="resetForm()">
+                  New enquiry
+                </button>
+              </div>
+
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="space-y-4">
+        <div [appReveal]="100" class="relative overflow-hidden bg-navy-950 p-6 text-white sm:p-7">
+          <div class="tech-grid absolute inset-0 opacity-40"></div>
+          <div class="relative">
+            <p class="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-gold-400">
+              Speak to our team
+            </p>
+            <h3 class="display mt-3 text-[1.8rem] leading-none text-white">P.S. Jadaun</h3>
+            <p class="mt-1.5 text-[0.72rem] uppercase tracking-[0.14em] text-white/45">
+              Head — Marketing
+            </p>
+            <p class="mt-4 text-[0.86rem] leading-relaxed text-white/60">
+              For new projects, vendor registration and technical discussions.
+            </p>
+            <div class="mt-5 space-y-2.5">
+              <a [href]="company.phones[0].href" class="flex items-center gap-3 text-[0.9rem] text-white/85 hover:text-gold-300">
+                <app-icon name="phone" [size]="16" class="text-gold-400" />
+                {{ company.phones[0].label }}
+              </a>
+              <a [href]="company.emails[0].href" class="flex items-start gap-3 text-[0.85rem] text-white/85 hover:text-gold-300">
+                <app-icon name="mail" [size]="16" class="mt-0.5 text-gold-400" />
+                <span class="break-all">{{ company.emails[0].label }}</span>
+              </a>
+              <a [href]="company.whatsapp" target="_blank" rel="noopener" class="flex items-center gap-3 text-[0.85rem] text-white/85 hover:text-gold-300">
+                <app-icon name="message" [size]="16" class="text-gold-400" />
+                WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div [appReveal]="140" class="card p-6">
+          <p class="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-steel-500">
+            Our locations
+          </p>
+          <div class="mt-4 space-y-4">
+            @for (office of offices; track office.id) {
+              <div class="border-l border-steel-200 pl-4">
+                <p class="text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-gold-700">{{ office.label }}</p>
+                <p class="mt-1 text-[0.82rem] font-medium text-navy-900">{{ office.name }}</p>
+                <p class="mt-1 text-[0.76rem] leading-relaxed text-steel-500">{{ office.lines.join(' ') }}</p>
+              </div>
+            }
+          </div>
+          <a routerLink="/about" class="mt-5 inline-flex items-center gap-1.5 text-[0.64rem] font-semibold uppercase tracking-[0.13em] text-navy-700 hover:text-gold-700">
+            About our works
+            <app-icon name="arrow-right" [size]="13" />
+          </a>
+        </div>
+
+        <div [appReveal]="180" class="border border-steel-200 bg-steel-50 p-5">
+          <div class="flex items-center gap-2 text-navy-800">
+            <app-icon name="clock" [size]="16" />
+            <p class="text-[0.6rem] font-semibold uppercase tracking-[0.16em]">Response time</p>
+          </div>
+          <p class="mt-2 text-[0.8rem] leading-relaxed text-steel-600">
+            Enquiries received on working days are acknowledged within one working day. Complex
+            PEB enquiries may need a short call before we can price accurately.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- Map -->
+<section class="border-y border-steel-200 bg-steel-50 py-16 lg:py-20">
+  <div class="container-x">
+    <div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between" [appReveal]="0">
+      <div>
+        <p class="eyebrow">Find us</p>
+        <h2 class="display mt-4 text-[2rem] leading-[0.95] text-navy-900 sm:text-[2.5rem]">
+          Head office &amp; works.
+        </h2>
+      </div>
+      <div class="flex gap-2">
+        @for (office of offices; track office.id; let i = $index) {
+          <button
+            type="button"
+            class="border px-3.5 py-2 text-[0.62rem] font-semibold uppercase tracking-[0.1em] transition-colors"
+            [class.border-navy-900]="activeOffice() === i"
+            [class.bg-navy-900]="activeOffice() === i"
+            [class.text-white]="activeOffice() === i"
+            [class.border-steel-300]="activeOffice() !== i"
+            [class.bg-white]="activeOffice() !== i"
+            [class.text-steel-600]="activeOffice() !== i"
+            (click)="selectOffice(i)"
+            [attr.aria-pressed]="activeOffice() === i"
+          >
+            {{ office.label }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="mt-8 grid gap-0 border border-steel-200 bg-white lg:grid-cols-[1.55fr_0.85fr]">
+      <div class="relative min-h-[320px] bg-steel-200">
+        <iframe
+          [src]="mapSrc()"
+          [title]="'Map showing ' + openOffice().label"
+          class="absolute inset-0 h-full min-h-[320px] w-full"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="flex flex-col justify-between p-6 sm:p-8">
+        <div>
+          <p class="text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-gold-700">
+            {{ openOffice().label }}
+          </p>
+          <h3 class="mt-2 font-display text-[1.6rem] leading-none text-navy-900">
+            {{ openOffice().name }}
+          </h3>
+          <address class="mt-4 text-[0.88rem] not-italic leading-relaxed text-steel-600">
+            @for (line of openOffice().lines; track line) {
+              <span class="block">{{ line }}</span>
+            }
+          </address>
+          <div class="mt-5 space-y-2 border-t border-steel-200 pt-5">
+            <a [href]="company.phones[0].href" class="flex items-center gap-2.5 text-[0.84rem] text-navy-800 hover:text-gold-700">
+              <app-icon name="phone" [size]="15" class="text-gold-700" />
+              {{ company.phones[0].label }}
+            </a>
+            <a [href]="company.emails[0].href" class="flex items-start gap-2.5 break-all text-[0.84rem] text-navy-800 hover:text-gold-700">
+              <app-icon name="mail" [size]="15" class="mt-0.5 text-gold-700" />
+              {{ company.emails[0].label }}
+            </a>
+          </div>
+        </div>
+        <a
+          [href]="directionsLink()"
+          target="_blank"
+          rel="noopener"
+          class="btn btn-outline-dark btn-sm mt-6 w-full"
+        >
+          Get directions
+          <app-icon name="arrow-up-right" [size]="14" />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="bg-white py-16 lg:py-20">
+  <div class="container-x">
+    <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+      <div [appReveal]="0">
+        <p class="eyebrow">Before you ask</p>
+        <h2 class="display mt-4 text-[2rem] leading-[0.95] text-navy-900 sm:text-[2.5rem]">
+          Common questions,<br class="hidden sm:block" />
+          straight answers.
+        </h2>
+        <p class="mt-4 text-[0.9rem] leading-relaxed text-steel-600">
+          Still unsure about scope or drawings? Call us — a short conversation usually saves a week
+          of emails.
+        </p>
+      </div>
+
+      <div [appReveal]="100" class="divide-y divide-steel-200 border-y border-steel-200">
+        @for (faq of faqs; track faq.q) {
+          <details class="group py-1">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 py-4 text-[0.95rem] font-medium text-navy-900 marker:content-none">
+              {{ faq.q }}
+              <span class="flex h-7 w-7 flex-none items-center justify-center border border-steel-200 text-steel-500 transition-transform group-open:rotate-180">
+                <app-icon name="chevron-down" [size]="14" />
+              </span>
+            </summary>
+            <p class="pb-5 pr-10 text-[0.86rem] leading-relaxed text-steel-600">{{ faq.a }}</p>
+          </details>
+        }
+      </div>
+    </div>
+  </div>
+</section>

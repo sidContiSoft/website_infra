@@ -1,0 +1,151 @@
+<app-page-hero
+  eyebrow="Services & solutions"
+  title="Capabilities that carry a project from drawing to handover."
+  crumb="Services"
+  image="assets/img/project-07.webp"
+  subtitle="Eight engineering disciplines, delivered separately or as one coordinated turnkey scope. Choose the capability you need — or hand us the whole envelope."
+>
+  <div class="mt-8 flex flex-wrap gap-2">
+    @for (service of services; track service.id) {
+      <a
+        [href]="'#' + service.id"
+        class="border border-white/15 bg-white/[0.04] px-3 py-1.5 text-[0.62rem] font-medium uppercase tracking-[0.1em] text-white/60 transition-colors hover:border-gold-400/50 hover:text-gold-200"
+      >
+        {{ service.short }}
+      </a>
+    }
+  </div>
+</app-page-hero>
+
+<!-- Service list -->
+<section class="bg-white py-16 lg:py-24">
+  <div class="container-x">
+    <div class="max-w-3xl" [appReveal]="0">
+      <p class="eyebrow">Detailed capabilities</p>
+      <h2 class="display mt-4 text-[2.25rem] leading-[0.95] text-navy-900 sm:text-[2.9rem]">
+        Everything you need, under one accountable contract.
+      </h2>
+      <p class="mt-4 text-[0.95rem] leading-relaxed text-steel-600">
+        Each scope is priced and scheduled transparently. Where scopes overlap — structure and
+        cladding, civil and services — our teams coordinate the interface instead of leaving it to
+        you.
+      </p>
+    </div>
+
+    <div class="mt-12">
+      @for (service of services; track service.id; let i = $index) {
+        <article
+          [id]="service.id"
+          [appReveal]="0"
+          class="scroll-mt-28 grid gap-7 border-t border-steel-200 py-10 lg:grid-cols-[0.44fr_0.56fr] lg:gap-14 lg:py-12"
+        >
+          <div>
+            <div class="flex items-center gap-3 text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-gold-700">
+              <span class="font-display text-sm text-navy-900">0{{ i + 1 }}</span>
+              <span class="h-px w-8 bg-gold-400"></span>
+              <span>{{ service.tag }}</span>
+            </div>
+
+            <div class="mt-5 flex items-start gap-4">
+              <span class="flex h-14 w-14 flex-none items-center justify-center border border-steel-200 bg-steel-50 text-navy-800">
+                <app-icon [name]="service.icon" [size]="26" />
+              </span>
+              <div>
+                <h3 class="display text-[1.8rem] leading-[1.02] text-navy-900 sm:text-[2.1rem]">
+                  {{ service.title }}
+                </h3>
+                <p class="mt-2 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-steel-500">
+                  {{ service.short }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:pt-1">
+            <p class="text-[0.93rem] leading-relaxed text-steel-600">{{ service.summary }}</p>
+            <ul class="mt-5 grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
+              @for (bullet of service.bullets; track bullet) {
+                <li class="flex gap-2.5 text-[0.84rem] leading-snug text-navy-800">
+                  <app-icon name="check" [size]="14" class="mt-0.5 text-gold-700" />
+                  {{ bullet }}
+                </li>
+              }
+            </ul>
+            <a
+              routerLink="/contact"
+              class="mt-6 inline-flex items-center gap-2 text-[0.66rem] font-semibold uppercase tracking-[0.14em] text-navy-700 transition-colors hover:text-gold-700"
+            >
+              Discuss this scope
+              <app-icon name="arrow-right" [size]="14" />
+            </a>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Delivery -->
+<section class="relative isolate overflow-hidden bg-navy-950 py-20 text-white lg:py-24">
+  <div class="tech-grid absolute inset-0 opacity-40"></div>
+  <div class="container-x relative">
+    <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-16">
+      <div [appReveal]="0">
+        <p class="eyebrow eyebrow-light">How we deliver</p>
+        <h2 class="display mt-4 text-[2.25rem] leading-[0.94] text-white sm:text-[2.9rem]">
+          From load calculation<br class="hidden sm:block" />
+          to final punch point.
+        </h2>
+        <p class="mt-5 text-[0.94rem] leading-relaxed text-white/60">
+          A project manager owns the programme across engineering, works and site. You get one
+          schedule, one reporting line and one team clearing the interfaces.
+        </p>
+        <a routerLink="/about" class="btn btn-outline-light mt-7">
+          How we work
+          <app-icon name="arrow-right" [size]="15" />
+        </a>
+      </div>
+
+      <div class="grid gap-px bg-white/10 sm:grid-cols-2">
+        @for (step of delivery; track step.title; let i = $index) {
+          <div [appReveal]="i * 70" class="bg-navy-950 p-6">
+            <div class="flex items-center justify-between">
+              <app-icon [name]="step.icon" [size]="24" class="text-gold-400" />
+              <span class="font-display text-sm tracking-[0.1em] text-white/25">0{{ i + 1 }}</span>
+            </div>
+            <h3 class="mt-5 font-display text-[1.35rem] leading-none text-white">{{ step.title }}</h3>
+            <p class="mt-2.5 text-[0.84rem] leading-relaxed text-white/55">{{ step.text }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sectors -->
+<section class="bg-white py-16 lg:py-20">
+  <div class="container-x">
+    <div class="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-center">
+      <div [appReveal]="0">
+        <p class="eyebrow">Sectors we serve</p>
+        <h2 class="display mt-4 text-[2rem] leading-[0.95] text-navy-900 sm:text-[2.5rem]">
+          Specified for the<br class="hidden sm:block" />
+          way you operate.
+        </h2>
+      </div>
+      <div [appReveal]="100" class="flex flex-wrap gap-2.5">
+        @for (sector of sectors; track sector) {
+          <span class="border border-steel-200 bg-steel-50 px-3.5 py-2 text-[0.78rem] font-medium text-navy-800">
+            {{ sector }}
+          </span>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-cta-band
+  image="assets/img/hero-2.webp"
+  title="Not sure which scope you need?"
+  description="Send us your layout and intended use. We will advise on the right structure, envelope and services package — with no obligation."
+/>
